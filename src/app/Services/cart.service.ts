@@ -24,10 +24,10 @@ export class CartService {
 
   addToCart(cartItem: Cart) {
     console.log(cartItem)
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
+    // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.username + ':' + this.password)});
     // this.http.post(this.url+"register.do", user);
     // console.log(this.http.post(this.url + "add", cartItem,headers))
-    return this.http.post(this.url + "add", cartItem,headers)
+    return this.http.post(this.url + "add", cartItem);
   }
 
   updateQty(item: Cart, qty: number) {

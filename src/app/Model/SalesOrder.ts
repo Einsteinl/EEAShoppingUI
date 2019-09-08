@@ -2,15 +2,15 @@ import { OrderItem } from "./OrderItem";
 
 export class SalesOrder {
 
-    id: number;
-    userId: number;
+    id: string;
+    userId: string;
     orderNo: number;
-    productId: number;
+    productId: string;
     productName: string;
     productImage: string;
-    currentUnitPrice: string;
+    currentUnitPrice: number;
     quantity: number;
-    totalPrice: string;
+    totalPrice: number;
     createTime: Date;
 
 }

@@ -20,7 +20,7 @@ export class ViewOrdersItemsComponent implements OnInit {
       let id = param.get('orderid');
       this.orderService.getSalesOrder(id).subscribe(order=>{
         this.order = order;
-        this.orderItems = order.orderItems;
+        // this.orderItems = order.orderItems;
       })
     })
   }

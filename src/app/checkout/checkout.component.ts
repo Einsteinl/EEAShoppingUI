@@ -54,10 +54,10 @@ export class CheckoutComponent implements OnInit {
       salesOrder.userId = this.user.id;
       salesOrder.productId = cartItem.product.id;
       salesOrder.productName = cartItem.product.name;
-      salesOrder.currentUnitPrice = cartItem.product.price;
+      salesOrder.currentUnitPrice = Number(cartItem.product.price);
       salesOrder.productImage = cartItem.product.subImages;
       salesOrder.quantity = cartItem.quantity;
-      salesOrder.totalPrice = cartItem.quantity * cartItem.product.price;
+      salesOrder.totalPrice = cartItem.quantity * Number(cartItem.product.price);
       salesOrders.push(salesOrder);
     }
 
