@@ -1,13 +1,13 @@
 <div class="card-deck">
-<div (click)="gotoProduct(product.pId)" [ngClass]="{'promocard': product.promotion == null}" [routerLink]="['products/', product.pId]" class="card">
-    <img class="card-img-top" [src]="product.pImg"/>
+<div (click)="gotoProduct(product.id)" [ngClass]="{'promocard': product.promotion == null}" [routerLink]="['products/', product.id]" class="card">
+    <img class="card-img-top" [src]="product.subImages"/>
     <div class="card-body">
-      <h4 class="card-title">{{ product.pName }}</h4>
-      <p class="card-text">{{ product.pPrice | currency : 'LKR'}}</p>
+      <p class="card-text">{{ product.name }}</p>
+      <p class="card-text">{{ product.price | currency : 'LKR'}}</p>
     </div>
     <div class="card-footer">
       <a id="acbtn" (click)="addToCart(product); $event.stopPropagation()" class="btn btn-secondary btn-block">Add to Cart</a>
     </div>
-  </div>  
+  </div>
 </div>
 

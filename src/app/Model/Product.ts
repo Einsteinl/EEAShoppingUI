@@ -2,13 +2,13 @@ import { Promotion } from "./Promotion";
 
 
 export interface Product {
-    pId: string;
-    pName:string;
-    pCategory:string;
-    pDescription:string;
-    pPrice: number;
-    pQty:number;
-    pImg:string;
+    id: string;
+    name:string;
+    categoryId:string;
+    subtitle:string;
+    price: number;
+    stock:number;
+    subImages:string
     promotion:Promotion
 
 }

@@ -17,9 +17,11 @@ export class RegisterComponent implements OnInit {
    userRole  =  ([{'roleId': 'jfnjk33','role':'USER'}])
 
   isEmailValid : boolean = true;
+  isUsernameValid : boolean = true;
   formInvalid : boolean;
   constructor(private auth : AuthService, private router:Router) { }
   errMsg = ""
+  usernameErrMsg = ""
   ngOnInit() {
   }
 
@@ -27,8 +29,8 @@ export class RegisterComponent implements OnInit {
     let user : User = form.value;
     let newUser : User = <User> new Object();
     newUser = user;
-    newUser.role = "jfnjk33";
-    
+    newUser.role = "2";
+
     if(form.invalid) {
       this.formInvalid = true;
       console.log("user req did not send")
@@ -39,22 +41,27 @@ export class RegisterComponent implements OnInit {
         console.log(res)
         this.router.navigate(['login'])
       }, err => console.log(err))
-      
-    }
-    
-    
 
-    
+    }
+
+
+
+
   }
 
   onEmailBlur(email : string) {
-  
+
     if(email != ""){
       if(email.includes("@")){
         this.auth.CheckEmail(email).subscribe(res=>{
-          if(<boolean> res)
-          this.isEmailValid = false
-          this.errMsg = "Email address is already exist"
+          if(<boolean> res){
+            this.isEmailValid = false
+            this.errMsg = "Email address is already exist"
+          }
+          else {
+            this.isEmailValid = true
+          }
+
         },
         err=>console.log(err));
       }
@@ -62,6 +69,23 @@ export class RegisterComponent implements OnInit {
         this.isEmailValid = false;
         this.errMsg = "Email address is not valid"
       }
+    }
+  }
+
+  onUsernameBlur(username : string) {
+
+    if(username != ""){
+      this.auth.CheckUsername(username).subscribe(res=>{
+          if(<boolean> res){
+            this.isUsernameValid = false
+            this.usernameErrMsg = "Username is already exist"
+          }
+          else {
+            this.isUsernameValid = true
+          }
+
+        },
+        err=>console.log(err));
     }
   }
 }

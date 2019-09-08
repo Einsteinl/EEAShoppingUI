@@ -22,7 +22,7 @@ export class AddProductsComponent implements OnInit {
 
   constructor(private router : Router, private route: ActivatedRoute, private productService : ProductService, private categoryService : CategoryService, private imagesService : ImagesService) { }
 
-  
+
 
   ngOnInit() {
     this.route.paramMap.subscribe(param => {
@@ -41,22 +41,22 @@ export class AddProductsComponent implements OnInit {
   }
 
   public onSubmit() {
-    
+
     if(this.product!=null){
       console.log(this.product);
       let prod = this.productService.addProduct(this.product).subscribe(product => {
-        console.log(product.pName + " sucessfully added")
+        console.log(product.name + " sucessfully added")
       this.router.navigate(['admin/products']);
 
       },
       err => {
-        console.log(this.product.pName + "Couldn't post"+ err)
+        console.log(this.product.name + "Couldn't post"+ err)
       });
       console.log(prod);
 
       return prod;
     }
-    
+
   }
 
   previewCard(form){
@@ -64,7 +64,7 @@ export class AddProductsComponent implements OnInit {
       this.preview = true;
     this.product = form;
     }
-    
+
   }
 
   public getCategories() {
@@ -85,26 +85,26 @@ export class AddProductsComponent implements OnInit {
     })
     // this.uploadFile(this.selectedImg)
   }
-  
+
   uploadFile(file) {
     var url = `https://api.cloudinary.com/v1_1/apiit-eea/upload`;
     var xhr = new XMLHttpRequest();
     var fd = new FormData();
     xhr.open('POST', url, true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-  
+
     // Reset the upload progress bar
     //  document.getElementById('progress').style.width = 0;
-    
+
     // Update progress (can be used to show progress indicator)
     // xhr.upload.addEventListener("progress", function(e) {
     //   var progress = Math.round((e.loaded * 100.0) / e.total);
     //   document.getElementById('progress').style.width = progress + "%";
-  
+
     //   console.log(`fileuploadprogress data.loaded: ${e.loaded},
     // data.total: ${e.total}`);
     // });
-  
+
     xhr.onreadystatechange = function(e) {
       if (xhr.readyState == 4 && xhr.status == 200) {
         // File uploaded successfully
@@ -120,12 +120,12 @@ export class AddProductsComponent implements OnInit {
         document.getElementById('gallery').appendChild(img);
       }
     };
-  
+
     fd.append('upload_preset', "j56kaixh");
     fd.append('tags', 'browser_upload'); // Optional - add tag for image admin in Cloudinary
     fd.append('file', file);
     xhr.send(fd);
-    
+
   }
 
   // uploadImage() {

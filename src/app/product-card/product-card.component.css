@@ -1,6 +1,6 @@
 .card {
-    height: 350px;
-    width: 200px;
+    height: 400px;
+    width: 275px;
     margin-bottom: 1.5vh;
     margin-left: 2vw;
 }
@@ -9,8 +9,8 @@
 }
 
 .card-img-top{
-    height: 150px;
-    width: 200px;
+    height: 200px;
+    width: 270px;
 }
 
 
@@ -20,7 +20,7 @@
 
 .promocard {
     background-color: rgba(62, 201, 235, 0.082);
-    
+
 }
 
 .promoacbtn{

@@ -10,22 +10,22 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  url = "http://localhost:8080/product/";
+  url = "http://localhost:8888/product";
   // prod : Product = null;
   email = sessionStorage.getItem("email")
   password = sessionStorage.getItem("password")
   getProducts() {
-    return this.http.get<Product[]>(this.url+"public/all");
+    return this.http.get<Product[]>(this.url+"/findAll");
   }
 
   getProductsByCategory(catId){
-    return this.http.get<Product[]>(this.url+"public/category/"+catId)
+    return this.http.get<Product[]>(this.url+"/findProductByCategoryID/"+catId)
   }
 
   getProduct(pid)  {
-    
-    return this.http.get<Product>(this.url+pid);
-    
+
+    return this.http.get<Product>(this.url + "/" + pid);
+
   }
 
   addProduct(product: Product) {

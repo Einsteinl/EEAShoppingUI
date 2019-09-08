@@ -11,7 +11,7 @@ import { Product } from '../Model/Product';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
+
 
   constructor(private service : ProductService, private catService : CategoryService, private dataService : DataService) { }
 
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   public getAllProducts() {
-    
+
     this.service.getProducts().subscribe(res =>{
       console.log("fetching products...");
        this.filteredProducts = this.products = res;
@@ -41,12 +41,12 @@ export class HomeComponent implements OnInit {
 
   filter(query:string) {
       this.filteredProducts  = (query) ? this.products.filter(p=>{
-        return p.pName.toLowerCase().includes(query.toLowerCase()) || p.pDescription.toLowerCase().includes(query.toLowerCase())
+        return p.name.toLowerCase().includes(query.toLowerCase()) || p.subtitle.toLowerCase().includes(query.toLowerCase())
       }) : this.products;
     // })
-      
+
   }
-  
+
   filterProducts(cid) {
     this.ActiveCat = cid;
     if(cid == "-1"){
@@ -58,5 +58,5 @@ export class HomeComponent implements OnInit {
     })
   }
   }
-  
+
 }

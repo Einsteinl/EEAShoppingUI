@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class SalesOrderService {
 
-  url = "http://localhost:8080/salesOrder/";
+  url = "http://localhost:8888/order/";
   constructor(private http:HttpClient) { }
 
 
@@ -23,8 +23,8 @@ export class SalesOrderService {
     return this.http.get<SalesOrder[]>(this.url+"user/"+uid);
   }
 
-  addOrders(sale:SalesOrder){
+  addOrders(sales: SalesOrder[]){
 
-    return this.http.post<SalesOrder>(this.url+"add", sale);
+    return this.http.post<SalesOrder>(this.url+"add", sales);
   }
 }

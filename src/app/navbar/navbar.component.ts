@@ -24,22 +24,22 @@ export class NavbarComponent implements OnInit {
   query : string
   logout(){
     sessionStorage.clear();
-    sessionStorage.setItem('email', 'no_user')
+    sessionStorage.setItem('username', 'no_user')
     this.router.navigate(['home']).then(()=>{
     location.reload();
-      
+
     })
     console.log("User logged out");
   }
 
   currentUser(){
     let name;
-    if(sessionStorage.getItem("email")!="no_user"){
-      name = sessionStorage.getItem("email")
+    if(sessionStorage.getItem("username")!="no_user"){
+      name = sessionStorage.getItem("username")
       this.authService.getUser(name).subscribe(user => {
           this.user = user
-          console.log(user.role[0])
-          if(user.role[0].roleId == "aifi33"){
+          console.log(user.role)
+          if(user.role == "1"){
             this.admin = true;
           }else{
             this.admin = false;
@@ -52,6 +52,6 @@ export class NavbarComponent implements OnInit {
     return name;
   }
 
-  
+
 
 }

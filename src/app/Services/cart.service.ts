@@ -9,48 +9,51 @@ export class CartService {
   cartItems$;
   constructor(private http: HttpClient) { }
 
-  url = "http://localhost:8080/auth/cart/";
+  url = "http://localhost:8888/cart/";
 
-  email = sessionStorage.getItem("email")
+  username = sessionStorage.getItem("username")
   password = sessionStorage.getItem("password")
 
   getCartItems() {
-    
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
-    return this.http.get<Cart[]>(this.url + "uid/"+ this.email , {headers}) //filter from user
+
+    // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
+    return this.http.get<Cart[]>(this.url + "username/"+ this.username) //filter from user
 
   }
 
 
   addToCart(cartItem: Cart) {
+    console.log(cartItem)
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
-    return this.http.post<Cart>(this.url + "add", cartItem, {headers})      
+    // this.http.post(this.url+"register.do", user);
+    // console.log(this.http.post(this.url + "add", cartItem,headers))
+    return this.http.post(this.url + "add", cartItem,headers)
   }
 
   updateQty(item: Cart, qty: number) {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
+    // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
 
-    item.amount = item.amount + qty;
+    item.quantity = item.quantity + qty;
     console.log(item)
-    return this.http.put<Cart>(this.url, item, {headers}).subscribe(item => console.log(item.amount))
+    return this.http.put<Cart>(this.url, item).subscribe(item => console.log(item.quantity))
   }
 
-  deleteCartItemsByUser(email : string) {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
+  deleteCartItemsByUser(username : string) {
+    // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
 
-    return this.http.delete(this.url + "user/" + email, {headers});
+    return this.http.delete(this.url + "username/" + username);
   }
 
   deleteCartItem(id: string) {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
+    // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
 
-    return this.http.delete(this.url + id, {headers});
+    return this.http.delete(this.url +"delete/" + id);
   }
 
   addItemsToCart(cartItems: Cart[]) {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
+    // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(this.email + ':' + this.password)});
 
-    return this.http.post<Cart>(this.url + "add/items", cartItems, {headers});
+    return this.http.post<Cart>(this.url + "add/items", cartItems);
 
   }
 }

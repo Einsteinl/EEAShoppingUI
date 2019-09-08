@@ -11,14 +11,14 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent implements OnInit, OnDestroy {
-  
+
   products : Product[] =[]
   filteredProducts : Product[] = []
   category : Category
   subscription : Subscription
-  categories$ 
-  constructor(private prodService : ProductService, private catService : CategoryService) { 
-   
+  categories$
+  constructor(private prodService : ProductService, private catService : CategoryService) {
+
   }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     }, err => {
       console.log(err)
     });
-    
+
     this.categories$ = this.catService.getCategories();
   }
 
@@ -35,7 +35,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
   addCategory() {
-    
+
     var categoryName = prompt("Enter new category name");
     console.log(categoryName);
     if(categoryName!=null || categoryName != ""){
@@ -46,7 +46,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
 
   filter(query:string){
     // console.log(query);
-    this.filteredProducts = (query) ? this.products.filter(p=>p.pName.toLowerCase().includes(query.toLowerCase()) || p.pDescription.toLowerCase().includes(query.toLowerCase())) : this.products;
+    this.filteredProducts = (query) ? this.products.filter(p=>p.name.toLowerCase().includes(query.toLowerCase()) || p.subtitle.toLowerCase().includes(query.toLowerCase())) : this.products;
   }
 
   deleteProduct(pid){

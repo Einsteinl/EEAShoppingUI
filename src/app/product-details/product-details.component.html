@@ -2,15 +2,15 @@
   <!-- <div class="container"> -->
   <div class="row">
     <div class="col-8">
-      <img [src]=product.pImg alt="Product image" class="detail-img">
+      <img [src]=product.subImages alt="Product image" class="detail-img">
 
     </div>
     <div class="col-3.5">
-      <h2>{{ product.pName }}</h2>
+      <h2>{{ product.name }}</h2>
       <div class="container">
 
-        <p>{{product.pDescription}} </p>
-        <h6>Rs. {{product.pPrice}}</h6>
+        <p>{{product.subtitle}} </p>
+        <h6>Rs. {{product.price}}</h6>
         <button class="btn btn-success" (click)="addToCart(product)">Add To Cart</button>
 
       </div>

@@ -14,7 +14,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 })
 export class ProductDetailsComponent implements OnInit {
   product : Product
- 
+
 
   cart : Cart = <Cart>{};
 
@@ -22,7 +22,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
 
-      
+
 
     this.route.paramMap.subscribe(param => {
       let id = param.get('id');
@@ -30,22 +30,24 @@ export class ProductDetailsComponent implements OnInit {
         this.product = product;
       })
     })
-    
+
 
   }
 
   addToCart(product:Product) {
-    let email = sessionStorage.getItem('email');
-    if(email == "no_user"){
+    let username = sessionStorage.getItem('username');
+    if(username == "no_user" || username == ""){
       this.router.navigate(['login'])
     }else{
       let cart =<Cart> new Object();
       cart.product = product
-      cart.userEmail = email;
-      cart.amount = 1;
-      
-      this.cartService.addToCart(cart);
+      cart.username = username;
+      cart.quantity = 1;
+
+      this.cartService.addToCart(cart).subscribe(res => {
+        console.log(res)
+      });
     }
-   
+
   }
 }

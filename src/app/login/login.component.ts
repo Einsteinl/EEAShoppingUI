@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService:AuthService, private router:Router) { }
 
   ngOnInit() {
-    if(sessionStorage.getItem("email") != "no_user"){
+    if(sessionStorage.getItem("username") != "no_user"){
       this.router.navigate([''])
     }
   }
@@ -23,10 +23,10 @@ export class LoginComponent implements OnInit {
 
     console.log(form);
 
-    this.authService.authenticate(form.email, form.password).subscribe(user => {
+    this.authService.authenticate(form.username, form.password).subscribe(user => {
       if(user != null){
         console.log(user);
-        sessionStorage.setItem("email", user.email)
+        sessionStorage.setItem("username", user.username)
         sessionStorage.setItem("password", user.password)
         this.authService.authenticated = true;
         this.router.navigate(["home"]).then(()=>{
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
       }else{
         console.log("login failed")
-        sessionStorage.setItem("email", "no_user")
+        sessionStorage.setItem("username", "no_user")
         this.errMsg = "Login failed !!"
         this.authService.authenticated = false;
       }

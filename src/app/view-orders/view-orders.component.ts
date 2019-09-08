@@ -14,18 +14,18 @@ export class ViewOrdersComponent implements OnInit {
   orders:SalesOrder[] = []
   constructor(private orderService:SalesOrderService, private userService:AuthService, private router:Router) { }
 
-  email = sessionStorage.getItem("email")
+  username = sessionStorage.getItem("username")
   ngOnInit() {
-    if(this.email != "no_user"){
-      this.userService.getUser(this.email).subscribe(user => {
-        this.orderService.getOrdersByUid(user.uId).subscribe(orders => {
+    if(this.username != "no_user"){
+      this.userService.getUser(this.username).subscribe(user => {
+        this.orderService.getOrdersByUid(user.id).subscribe(orders => {
         this.orders = orders;
       }, err => console.log("getting orders failed !!"))
         })
     }else{
       this.router.navigate(['login'])
     }
-    
+
   }
 
 }

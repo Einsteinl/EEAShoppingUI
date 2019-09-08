@@ -19,9 +19,9 @@ export class ProductCardComponent implements OnInit {
   dicountedPrice: number;
   constructor(private router : Router, private productService : ProductService, private cartService: CartService) { }
 
-  
+
   ngOnInit() {
-    
+
   }
 
   gotoProduct(productid) {
@@ -31,35 +31,35 @@ export class ProductCardComponent implements OnInit {
     this.productService.getProduct(productid).subscribe(prod => {
       // console.log(prod +"hooooo")
       this.prod = prod;
-      this.router.navigate(['products', prod.pId])
-    }, err => { 
+      this.router.navigate(['products', prod.id])
+    }, err => {
       console.log(err);
     });
-    
+
     //
   }
 
   promo(){
     if(this.prod.promotion != null){
-     let promoPrice = this.prod.pPrice * this.prod.promotion.percentage
-     this.dicountedPrice = this.prod.pPrice - promoPrice;
+     let promoPrice = this.prod.price * this.prod.promotion.percentage
+     this.dicountedPrice = this.prod.price - promoPrice;
     }
   }
 
   addToCart(product:Product) {
-    let email = sessionStorage.getItem('email');
-    if(email == "no_user"){
+    let username = sessionStorage.getItem('username');
+    if(username == "no_user" || username == ""){
       this.router.navigate(['login'])
     }else{
       let cart =<Cart> new Object();
       cart.product = product
-      cart.userEmail = email;
-      cart.amount = 1;
-      
+      cart.username = username;
+      cart.quantity = 1;
+
       this.cartService.addToCart(cart).subscribe(res => {
         console.log(res)
       });
     }
-   
+
   }
 }

@@ -21,7 +21,7 @@ export class CheckoutComponent implements OnInit {
   total = 0;
   product: Product = < Product > new Object();
   validCheckout:boolean = false;
-  email = sessionStorage.getItem("email")
+  username = sessionStorage.getItem("username")
   user:getUser=<getUser> new Object();
 
   constructor(private cartService: CartService, private authService:AuthService, private salesService:SalesOrderService, private router:Router) {
@@ -29,47 +29,44 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getUser(this.email).subscribe(user => {
+    this.authService.getUser(this.username).subscribe(user => {
       this.user = user;
     })
     this.cartService.getCartItems().subscribe(res => {
       this.cartList = res;
       this.cartListLength = this.cartList.length;
-      
+
       this.calcTotal();
     })
   }
 
   calcTotal() {
     for (let cartItem of this.cartList) {
-      this.total = cartItem.amount * cartItem.product.pPrice + this.total;
+      this.total = cartItem.quantity * cartItem.product.price + this.total;
     }
   }
 
   checkout(){
-    var salesOrder:SalesOrder =<SalesOrder> new Object();
-    
-      salesOrder.address = this.user.address;
-      salesOrder.totalAmount = this.total;
-      salesOrder.userId = this.user.uId;
 
-    var orderItems:OrderItem[] = []
+    var salesOrders:SalesOrder[] = []
     for(let cartItem of this.cartList){
-    var salesOrderItem:OrderItem =<OrderItem> new Object();
-      salesOrderItem.product = cartItem.product;
-      salesOrderItem.qty = cartItem.amount;
-      
-      orderItems.push(salesOrderItem);
+      var salesOrder: SalesOrder = <SalesOrder> new Object();
+      salesOrder.userId = this.user.id;
+      salesOrder.productId = cartItem.product.id;
+      salesOrder.productName = cartItem.product.name;
+      salesOrder.currentUnitPrice = cartItem.product.price;
+      salesOrder.productImage = cartItem.product.subImages;
+      salesOrder.quantity = cartItem.quantity;
+      salesOrder.totalPrice = cartItem.quantity * cartItem.product.price;
+      salesOrders.push(salesOrder);
     }
 
-      salesOrder.orderItems = orderItems;
-      
-      this.salesService.addOrders(salesOrder).subscribe(order => {
+      this.salesService.addOrders(salesOrders).subscribe(order => {
         console.log(order)
         this.router.navigate(['myorders'])
       },
       err => console.log(err));
 
-      this.cartService.deleteCartItemsByUser(this.user.email).subscribe(res => console.log(res))
+      this.cartService.deleteCartItemsByUser(this.user.username).subscribe(res => console.log(res))
   }
 }

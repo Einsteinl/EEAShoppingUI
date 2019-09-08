@@ -2,17 +2,21 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Date</th>
-      <th scope="col">Address</th>
-      <th scope="col">Total</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">UnitPrice</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">TotalPrice</th>
+      <th scope="col">CreateTime</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let order of orders; let i = index" [routerLink]="order.orderId">
       <th scope="row">{{i+1}}</th>
-      <td>{{order.orderDate}}</td>
-      <td>{{order.address}}</td>
-      <td>{{order.totalAmount}}</td>
+      <td>{{order.productName}}</td>
+      <td>{{order.currentUnitPrice}}</td>
+      <td>{{order.quantity}}</td>
+      <td>{{order.totalPrice}}</td>
+      <td>{{order.createTime}}</td>
     </tr>
   </tbody>
 </table>

@@ -12,13 +12,13 @@
   <tbody>
     <tr *ngFor="let cartItem of cartItems; let i = index">
       <th scope="row">{{i+1}}</th>
-      <td>{{cartItem.product.pName}}</td>
+      <td>{{cartItem.product.name}}</td>
       <td>
-        <input class="form-row col-3 form-control" type="number" value="{{cartItem.amount}}" min="1" (change)="onQtyChange($event.target.value, i)">
+        <input class="form-row col-3 form-control" type="number" value="{{cartItem.quantity}}" min="1" (change)="onQtyChange($event.target.value, i)">
       </td>
-      <td>{{cartItem.product.pPrice}}</td>
-      <td>{{cartItem.product.pPrice*cartItem.amount}}</td>
-      <td><a class="btn btn-danger" (click)="deleteCartItem(cartItem.cid)">Delete</a></td>
+      <td>{{cartItem.product.price}}</td>
+      <td>{{cartItem.product.price*cartItem.quantity}}</td>
+      <td><a class="btn btn-danger" (click)="deleteCartItem(cartItem.cartId)">Delete</a></td>
     </tr>
   </tbody>
 </table>
